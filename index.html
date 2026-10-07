@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Academia NeoRobot: proyectos de robótica para crear en casa.">
+  <title>Academia NeoRobot | Proyectos de robótica para crear en casa</title>
+  <style>
+    :root {
+      --ink: #132038;
+      --muted: #536179;
+      --surface: #ffffff;
+      --soft: #f4f7ff;
+      --violet: #5b34f2;
+      --violet-dark: #4122b7;
+      --aqua: #18cbd1;
+      --lime: #d8ef4b;
+      --orange: #ff8a3d;
+      --line: #dce3f0;
+      --shadow: 0 18px 55px rgba(28, 46, 92, .14);
+      --radius: 24px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); font: 500 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--surface); }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin: auto; }
+    .eyebrow { display: inline-flex; gap: 8px; align-items: center; padding: 7px 12px; border-radius: 999px; background: rgba(216,239,75,.34); color: #263300; font-size: .78rem; font-weight: 850; letter-spacing: .055em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 4px rgba(91,52,242,.14); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { letter-spacing: -.035em; line-height: 1.04; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); max-width: 760px; margin-bottom: 16px; }
+    .lead { color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.21rem); max-width: 620px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 13px 23px; border-radius: 14px; background: var(--violet); color: white; font-weight: 850; box-shadow: 0 9px 0 var(--violet-dark), 0 16px 30px rgba(91,52,242,.25); transition: transform .16s ease, box-shadow .16s ease; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 11px 0 var(--violet-dark), 0 20px 32px rgba(91,52,242,.27); }
+    .button:active { transform: translateY(5px); box-shadow: 0 4px 0 var(--violet-dark); }
+    .button.alt { background: var(--ink); box-shadow: 0 9px 0 #060d1d; }
+    .note { color: var(--muted); font-size: .87rem; }
+
+    .topbar { color: #263300; background: var(--lime); text-align: center; padding: 10px 18px; font-size: .86rem; font-weight: 900; letter-spacing: .045em; text-transform: uppercase; }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 21px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 950; font-size: 1.08rem; letter-spacing: -.04em; }
+    .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 12px; background: var(--violet); color: var(--lime); font-size: 21px; transform: rotate(-5deg); }
+    .nav-tag { font-size: .85rem; color: var(--muted); font-weight: 750; }
+
+    .hero { overflow: hidden; padding: 34px 0 66px; background: radial-gradient(circle at 83% 20%, rgba(24,203,209,.3), transparent 24%), radial-gradient(circle at 5% 90%, rgba(216,239,75,.44), transparent 30%), var(--soft); }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: clamp(30px, 6vw, 72px); }
+    h1 { margin: 15px 0 20px; font-size: clamp(2.6rem, 5.5vw, 5.3rem); }
+    h1 .accent { color: var(--violet); position: relative; white-space: nowrap; }
+    h1 .accent::after { content: ""; position: absolute; z-index: 0; height: 10px; border-radius: 10px; background: var(--lime); left: -4px; right: -4px; bottom: 3px; transform: rotate(-1.5deg); }
+    h1 .accent > span { position: relative; z-index: 1; }
+    .checks { display: grid; gap: 11px; margin: 25px 0 27px; padding: 0; list-style: none; font-weight: 720; }
+    .checks li { display: flex; gap: 10px; align-items: flex-start; }
+    .checks li::before { content: "✓"; display: grid; flex: 0 0 22px; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 7px; color: var(--violet-dark); background: var(--lime); font-size: .86rem; font-weight: 950; }
+    .hero-art { position: relative; min-height: 440px; border: 2px solid rgba(19,32,56,.1); border-radius: 34px; background: linear-gradient(145deg, #6c44f8, #3d25b6); box-shadow: var(--shadow); overflow: hidden; }
+    .hero-art::before, .hero-art::after { content: ""; position: absolute; border-radius: 50%; filter: blur(1px); }
+    .hero-art::before { width: 330px; height: 330px; top: -125px; right: -100px; background: rgba(216,239,75,.95); }
+    .hero-art::after { width: 270px; height: 270px; bottom: -140px; left: -115px; background: rgba(24,203,209,.75); }
+    .orbit { position: absolute; border: 2px dashed rgba(255,255,255,.6); border-radius: 50%; }
+    .orbit.one { width: 340px; height: 340px; top: 70px; left: 65px; transform: rotate(-17deg); }
+    .orbit.two { width: 230px; height: 230px; top: 127px; left: 120px; transform: rotate(31deg); }
+    .robot { position: absolute; z-index: 2; top: 84px; left: 50%; width: 210px; transform: translateX(-50%) rotate(-3deg); }
+    .robot-head { height: 133px; border: 8px solid var(--ink); border-radius: 39px 39px 31px 31px; background: #f7fbff; box-shadow: inset 0 -14px 0 #d5e4ff, 11px 12px 0 rgba(19,32,56,.15); }
+    .antenna { position: absolute; top: -38px; left: 50%; width: 9px; height: 40px; border-radius: 8px; background: var(--ink); transform: translateX(-50%); }
+    .antenna::after { content: ""; position: absolute; top: -10px; left: -8px; width: 25px; height: 25px; border: 6px solid var(--ink); border-radius: 50%; background: var(--lime); }
+    .eyes { display: flex; justify-content: center; gap: 24px; padding-top: 38px; }
+    .eyes i { display: block; width: 31px; height: 31px; border: 6px solid var(--ink); border-radius: 50%; background: var(--aqua); }
+    .mouth { width: 64px; height: 20px; margin: 17px auto 0; border: 6px solid var(--ink); border-top: 0; border-radius: 0 0 22px 22px; }
+    .robot-body { position: relative; width: 158px; height: 141px; margin: 11px auto 0; border: 8px solid var(--ink); border-radius: 28px; background: var(--orange); box-shadow: 9px 10px 0 rgba(19,32,56,.15); }
+    .robot-body::before, .robot-body::after { content: ""; position: absolute; top: 28px; width: 38px; height: 19px; border: 7px solid var(--ink); border-radius: 14px; background: #f7fbff; }
+    .robot-body::before { left: -44px; transform: rotate(13deg); }
+    .robot-body::after { right: -44px; transform: rotate(-13deg); }
+    .bolt { position: absolute; top: 42px; left: 59px; color: var(--ink); font-size: 48px; font-weight: 900; line-height: 1; }
+    .art-badge { position: absolute; z-index: 3; right: 24px; bottom: 24px; padding: 12px 15px; border: 2px solid var(--ink); border-radius: 15px; background: #fff; color: var(--ink); box-shadow: 6px 7px 0 var(--ink); font-size: .87rem; font-weight: 900; transform: rotate(3deg); }
+
+    .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; margin: -27px auto 0; box-shadow: 0 12px 35px rgba(19,32,56,.08); }
+    .trust div { background: #fff; padding: 19px; text-align: center; color: var(--muted); font-size: .9rem; font-weight: 760; }
+    .trust b { display: block; color: var(--ink); font-size: 1.06rem; }
+    section { padding: 94px 0; }
+    .center { text-align: center; }
+    .center .lead { margin-left: auto; margin-right: auto; }
+
+    .video-card { display: grid; place-items: center; min-height: 405px; margin-top: 38px; overflow: hidden; border: 8px solid var(--ink); border-radius: 29px; background: radial-gradient(circle at 50% 24%, #fff7ba 0 6%, transparent 6.5%), linear-gradient(136deg, var(--aqua), #3d73e4 49%, var(--violet)); box-shadow: 14px 15px 0 var(--ink); }
+    .video-card > div { display: grid; place-items: center; width: 95px; height: 95px; border: 0; border-radius: 50%; background: var(--lime); color: var(--ink); font-size: 33px; box-shadow: 0 7px 0 rgba(19,32,56,.5); }
+    .video-card p { position: absolute; margin: 290px 0 0; padding: 9px 13px; border-radius: 999px; background: rgba(19,32,56,.78); color: #fff; font-size: .85rem; font-weight: 750; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 42px; }
+    .card { padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(19,32,56,.06); }
+    .card-icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 19px; border-radius: 13px; background: var(--soft); color: var(--violet); font-size: 23px; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .card p { margin-bottom: 0; color: var(--muted); font-size: .94rem; }
+    .for-you { background: var(--ink); color: #fff; }
+    .for-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 39px; }
+    .for-list { padding: 29px; border: 1px solid rgba(255,255,255,.18); border-radius: 22px; background: rgba(255,255,255,.07); }
+    .for-list.no { color: #c6d0e1; background: rgba(255,255,255,.025); }
+    .for-list h3 { margin-bottom: 18px; font-size: 1.25rem; }
+    .for-list ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .for-list li { display: flex; gap: 10px; }
+    .for-list li::before { content: "✓"; color: var(--lime); font-weight: 950; }
+    .for-list.no li::before { content: "×"; color: var(--orange); }
+
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .project { overflow: hidden; border: 1px solid var(--line); border-radius: 21px; background: #fff; box-shadow: 0 9px 22px rgba(19,32,56,.08); }
+    .project-image { display: grid; place-items: center; height: 195px; overflow: hidden; background: var(--project-bg, #e9f4ff); }
+    .project-image > span { display: grid; place-items: center; width: 104px; height: 104px; border: 7px solid var(--ink); border-radius: 27px; background: var(--project-fill, var(--lime)); color: var(--ink); font-size: 47px; box-shadow: 9px 9px 0 rgba(19,32,56,.2); transform: rotate(var(--tilt, -4deg)); }
+    .project:nth-child(2n) .project-image > span { border-radius: 50%; }
+    .project:nth-child(3n) .project-image > span { border-radius: 13px; }
+    .project-copy { padding: 17px 18px 19px; }
+    .project-copy h3 { margin: 0; font-size: 1.08rem; }
+    .project-copy small { color: var(--muted); font-weight: 670; }
+    .image-pending { margin: 29px auto 0; padding: 12px 15px; border: 1px dashed #b7c2d6; border-radius: 12px; color: var(--muted); background: var(--soft); font-size: .83rem; max-width: 690px; }
+
+    .quote-strip { padding: 25px 0; overflow: hidden; background: var(--lime); color: var(--ink); }
+    .quote-row { display: flex; width: max-content; gap: 18px; animation: slide 34s linear infinite; }
+    .mini-quote { width: 305px; min-height: 126px; padding: 17px; border: 2px solid var(--ink); border-radius: 16px; background: #fff; box-shadow: 4px 5px 0 var(--ink); font-size: .93rem; }
+    .mini-quote p { margin-bottom: 7px; font-weight: 720; }
+    .mini-quote cite { color: var(--muted); font-size: .79rem; font-style: normal; font-weight: 800; }
+    @keyframes slide { to { transform: translateX(calc(-50% - 9px)); } }
+
+    .guarantee { display: grid; grid-template-columns: 160px 1fr; align-items: center; gap: 35px; max-width: 840px; margin: 0 auto; padding: 35px; border-radius: 28px; background: var(--soft); }
+    .seal { display: grid; place-items: center; width: 143px; height: 143px; margin: auto; border: 8px dashed var(--violet); border-radius: 50%; background: var(--lime); color: var(--violet-dark); text-align: center; font-size: 1.08rem; font-weight: 950; line-height: 1.08; transform: rotate(-7deg); }
+    .bonus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
+    .bonus { min-height: 205px; padding: 24px; border-radius: 19px; color: #fff; background: linear-gradient(145deg, #253452, #121c33); box-shadow: 0 11px 18px rgba(19,32,56,.13); }
+    .bonus:nth-child(2) { background: linear-gradient(145deg, #6e3af5, #3f1aaf); }
+    .bonus:nth-child(3) { background: linear-gradient(145deg, #109caa, #07546d); }
+    .bonus:nth-child(4) { background: linear-gradient(145deg, #ff9252, #d74f1c); }
+    .bonus:nth-child(5) { background: linear-gradient(145deg, #799b21, #465d06); }
+    .bonus small { display: block; margin-bottom: 42px; color: var(--lime); font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+    .bonus h3 { margin-bottom: 0; font-size: 1.25rem; }
+
+    .faq { max-width: 800px; margin: 38px auto 0; }
+    details { padding: 19px 0; border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; list-style: none; padding-right: 35px; position: relative; font-weight: 880; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; top: -8px; right: 0; color: var(--violet); font-size: 1.85rem; font-weight: 400; }
+    details[open] summary::after { content: "–"; }
+    details p { max-width: 690px; margin: 14px 0 0; color: var(--muted); }
+
+    .offer { padding: 90px 0; color: #fff; background: linear-gradient(135deg, #2a156f, #5b34f2 58%, #2499ac); text-align: center; }
+    .offer h2 { margin-left: auto; margin-right: auto; }
+    .price-box { display: grid; gap: 3px; width: min(100%, 420px); margin: 29px auto; padding: 24px; border: 2px solid rgba(255,255,255,.72); border-radius: 22px; background: rgba(255,255,255,.11); }
+    .price-box del { color: #d9d2ff; font-weight: 730; }
+    .price-box strong { color: var(--lime); font-size: clamp(3rem, 8vw, 5.6rem); letter-spacing: -.07em; line-height: .95; }
+    .price-box span { font-size: .91rem; font-weight: 750; }
+    .offer .button { background: var(--lime); color: #253300; box-shadow: 0 9px 0 #99ac19, 0 16px 28px rgba(0,0,0,.25); }
+    .checkout-note { width: min(100%, 630px); margin: 26px auto 0; padding: 12px; border: 1px dashed rgba(255,255,255,.55); border-radius: 10px; color: #f2efff; font-size: .78rem; }
+    code { padding: 2px 5px; border-radius: 5px; background: rgba(0,0,0,.18); color: #fff; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    footer { padding: 34px 0; color: var(--muted); text-align: center; font-size: .84rem; }
+
+    @media (max-width: 850px) { .hero-grid { grid-template-columns: 1fr; } .hero-copy { text-align: center; } .hero-copy .lead { margin-left: auto; margin-right: auto; } .checks { max-width: 430px; margin-left: auto; margin-right: auto; text-align: left; } .hero-art { max-width: 540px; width: 100%; margin: auto; } .cards { grid-template-columns: 1fr 1fr; } .project-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .wrap { width: min(calc(100% - 28px), var(--max)); } .nav-tag { display: none; } .trust { grid-template-columns: 1fr; margin-top: -13px; } section { padding: 68px 0; } .hero { padding-top: 18px; } .hero-art { min-height: 350px; } .robot { top: 58px; transform: translateX(-50%) scale(.88); } .orbit.one { top: 27px; left: 10px; } .orbit.two { top: 80px; left: 63px; } .cards, .project-grid, .bonus-grid, .for-grid { grid-template-columns: 1fr; } .guarantee { grid-template-columns: 1fr; text-align: center; padding: 28px 20px; } .video-card { min-height: 300px; } .video-card p { margin-top: 205px; } }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">Acceso inmediato · Acceso de por vida · Actualizaciones incluidas</div>
+  <header class="hero">
+    <div class="wrap">
+      <nav aria-label="Principal">
+        <a class="brand" href="#inicio"><span class="brand-mark">⚡</span>Academia NeoRobot</a>
+        <span class="nav-tag">Aprender creando, paso a paso</span>
+      </nav>
+      <div class="hero-grid" id="inicio">
+        <div class="hero-copy">
+          <span class="eyebrow">Más de 100 proyectos</span>
+          <h1>Convierte materiales simples en <span class="accent"><span>inventos increíbles</span></span>.</h1>
+          <p class="lead">Una biblioteca de proyectos de robótica explicados en video para que niños curiosos creen, prueben y aprendan desde casa.</p>
+          <ul class="checks">
+            <li>Proyectos guiados paso a paso, incluso si empiezan desde cero.</li>
+            <li>Ideas para estimular lógica, creatividad y pensamiento tecnológico.</li>
+            <li>Materiales sencillos de conseguir para crear en familia o en el aula.</li>
+          </ul>
+          <a class="button" href="#checkout">Quiero acceder a los proyectos</a>
+          <p class="note" style="margin-top:18px">Pago único · Disponible desde celular, tablet o computadora</p>
+        </div>
+        <div class="hero-art" role="img" aria-label="Ilustración de un robot educativo de Academia NeoRobot">
+          <div class="orbit one"></div><div class="orbit two"></div>
+          <div class="robot"><div class="antenna"></div><div class="robot-head"><div class="eyes"><i></i><i></i></div><div class="mouth"></div></div><div class="robot-body"><span class="bolt">ϟ</span></div></div>
+          <span class="art-badge">CREAR + PROBAR + APRENDER</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap trust" aria-label="Beneficios principales"><div><b>100+ videos</b>Proyectos claros y prácticos</div><div><b>Sin experiencia previa</b>Aprendes mientras construyes</div><div><b>A tu ritmo</b>Vuelve cuando quieras</div></div>
+
+    <section class="wrap center">
+      <span class="eyebrow">Así se aprende mejor</span>
+      <h2>Ver una idea tomar forma cambia por completo las ganas de aprender.</h2>
+      <p class="lead">Cada proyecto tiene una meta concreta: construir algo funcional con tus manos, comprender cómo funciona y querer hacer el siguiente.</p>
+      <div class="video-card" aria-label="Espacio reservado para video de presentación"><div aria-hidden="true">▶</div><p>REEMPLAZA ESTE BLOQUE POR TU VIDEO DE VENTAS</p></div>
+    </section>
+
+    <section class="wrap">
+      <div class="center"><span class="eyebrow">Pensado para la vida real</span><h2>Una experiencia que une juego, curiosidad y aprendizaje.</h2></div>
+      <div class="cards">
+        <article class="card"><div class="card-icon">🧠</div><h3>Razonamiento activo</h3><p>Los desafíos convierten cada intento en una oportunidad para pensar y resolver.</p></article>
+        <article class="card"><div class="card-icon">🛠️</div><h3>Manos a la obra</h3><p>Menos teoría pasiva, más proyectos que se pueden tocar, ajustar y mejorar.</p></article>
+        <article class="card"><div class="card-icon">🏠</div><h3>Desde cualquier lugar</h3><p>Ideal para tardes en familia, propuestas escolares o momentos de exploración individual.</p></article>
+        <article class="card"><div class="card-icon">🚀</div><h3>Progreso visible</h3><p>Cada creación terminada fortalece la confianza para afrontar el siguiente reto.</p></article>
+      </div>
+    </section>
+
+    <section class="for-you"><div class="wrap"><span class="eyebrow">¿Es para ti?</span><h2>Para mentes curiosas que disfrutan descubrir cómo funcionan las cosas.</h2><div class="for-grid"><div class="for-list"><h3>Encaja perfecto si buscas:</h3><ul><li>Actividades inteligentes para hacer en casa.</li><li>Recursos creativos para el aula.</li><li>Una forma divertida de acercarse a la tecnología.</li><li>Proyectos que conecten a adultos y niños.</li></ul></div><div class="for-list no"><h3>Probablemente no encaje si:</h3><ul><li>Solo quieres contenido para mirar sin construir.</li><li>No tienes interés en experimentar con materiales.</li><li>Buscas clases largas y puramente teóricas.</li><li>Prefieres una actividad sin retos ni pruebas.</li></ul></div></div></div></section>
+
+    <section class="wrap">
+      <div class="center"><span class="eyebrow">Ejemplos de la biblioteca</span><h2>Proyectos que querrán mostrarle a todo el mundo.</h2><p class="lead">Cada tarjeta es un punto de reemplazo para una imagen original generada en Higgsfield.</p></div>
+      <div class="project-grid">
+        <article class="project"><div class="project-image" style="--project-bg:#d8f5f5;--project-fill:#d8ef4b"><span>🚆</span></div><div class="project-copy"><h3>Tren eléctrico</h3><small>Movimiento y circuitos</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#e7e0ff;--project-fill:#ffb976;--tilt:5deg"><span>✈</span></div><div class="project-copy"><h3>Avión con motor</h3><small>Impulso y diseño</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#fff0dc;--project-fill:#18cbd1"><span>🚁</span></div><div class="project-copy"><h3>Helicóptero</h3><small>Construcción creativa</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#e4f7d4;--project-fill:#f4d04e"><span>🤖</span></div><div class="project-copy"><h3>Mano robótica</h3><small>Mecanismos en acción</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#e3edff;--project-fill:#ff9c71"><span>🚗</span></div><div class="project-copy"><h3>Auto de carrera</h3><small>Velocidad y energía</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#fbecff;--project-fill:#ab94ff"><span>💧</span></div><div class="project-copy"><h3>Bomba de agua</h3><small>Flujo y experimentación</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#fff7ce;--project-fill:#79d8da"><span>🛗</span></div><div class="project-copy"><h3>Elevador electrónico</h3><small>Ingenio aplicado</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#eeeaff;--project-fill:#d8ef4b"><span>🐶</span></div><div class="project-copy"><h3>Robot caminador</h3><small>Movimiento y creatividad</small></div></article>
+        <article class="project"><div class="project-image" style="--project-bg:#daf8ed;--project-fill:#ffbd5a"><span>💡</span></div><div class="project-copy"><h3>Experimentos mini</h3><small>Ideas para probar hoy</small></div></article>
+      </div>
+      <p class="image-pending"><strong>Imágenes Higgsfield pendientes:</strong> reemplaza cada bloque <code>.project-image</code> por una imagen 4:3 cuando estén generadas. Los prompts recomendados están al final del archivo.</p>
+    </section>
+
+    <section class="quote-strip" aria-label="Testimonios"><div class="quote-row">
+      <article class="mini-quote"><p>“A mis hijos les encantó construir los proyectos.”</p><cite>— Ana Silva</cite></article><article class="mini-quote"><p>“Muy creativo y educativo.”</p><cite>— Juan Pedro</cite></article><article class="mini-quote"><p>“Vale totalmente la pena.”</p><cite>— María Santos</cite></article><article class="mini-quote"><p>“Lo recomiendo a todos los padres.”</p><cite>— Carlos Lima</cite></article><article class="mini-quote"><p>“Mi hijo no deja de construir cosas.”</p><cite>— Roberto Alves</cite></article><article class="mini-quote"><p>“Muy bien explicado paso a paso.”</p><cite>— Paula Souza</cite></article>
+      <article class="mini-quote"><p>“A mis hijos les encantó construir los proyectos.”</p><cite>— Ana Silva</cite></article><article class="mini-quote"><p>“Muy creativo y educativo.”</p><cite>— Juan Pedro</cite></article><article class="mini-quote"><p>“Vale totalmente la pena.”</p><cite>— María Santos</cite></article><article class="mini-quote"><p>“Lo recomiendo a todos los padres.”</p><cite>— Carlos Lima</cite></article><article class="mini-quote"><p>“Mi hijo no deja de construir cosas.”</p><cite>— Roberto Alves</cite></article><article class="mini-quote"><p>“Muy bien explicado paso a paso.”</p><cite>— Paula Souza</cite></article>
+    </div></section>
+
+    <section class="wrap"><div class="guarantee"><div class="seal">7 DÍAS<br>DE GARANTÍA</div><div><span class="eyebrow">Compra con tranquilidad</span><h2 style="font-size:clamp(1.8rem,4vw,2.7rem);margin:14px 0">Explora los proyectos sin presión.</h2><p class="lead">Si el contenido no es lo que esperabas, podrás solicitar el reembolso dentro del plazo de garantía aplicable.</p></div></div></section>
+
+    <section class="wrap center"><span class="eyebrow">También recibes</span><h2>Bonos para que la experiencia continúe.</h2><p class="lead">Material complementario para acompañar cada etapa de exploración y creación.</p><div class="bonus-grid"><article class="bonus"><small>Bono 01</small><h3>Guía para empezar en robótica</h3></article><article class="bonus"><small>Bono 02</small><h3>Materiales y herramientas esenciales</h3></article><article class="bonus"><small>Bono 03</small><h3>Enciclopedia de componentes</h3></article><article class="bonus"><small>Bono 04</small><h3>Guía para resolver problemas</h3></article><article class="bonus"><small>Bono 05</small><h3>Diploma del pequeño inventor</h3></article></div></section>
+
+    <section class="wrap center"><span class="eyebrow">Preguntas frecuentes</span><h2>Todo lo que quieres saber antes de comenzar.</h2><div class="faq" style="text-align:left"><details><summary>¿Necesitamos conocimientos técnicos?</summary><p>No. Los proyectos se explican visualmente y paso a paso para acompañar a quienes comienzan desde cero.</p></details><details><summary>¿Hace falta comprar kits costosos?</summary><p>No necesariamente. La propuesta prioriza materiales accesibles; revisa cada proyecto para preparar lo que necesitarás.</p></details><details><summary>¿Cómo recibo el acceso?</summary><p>Después de confirmar el pago, configura la entrega automática por correo, WhatsApp o tu plataforma de contenidos.</p></details><details><summary>¿Puedo verlo desde el celular?</summary><p>Sí. Diseña tu área de miembros para que los videos se puedan consultar desde celular, tablet o computadora.</p></details><details><summary>¿Debo completar todo de una vez?</summary><p>No. El acceso está pensado para volver a cada proyecto cuando sea el momento indicado.</p></details></div></section>
+  </main>
+
+  <section class="offer" id="checkout"><div class="wrap"><span class="eyebrow">Oferta de lanzamiento</span><h2>Empieza hoy una nueva forma de aprender creando.</h2><p style="max-width:590px;margin:0 auto;color:#e7e2ff">Acceso a la biblioteca de proyectos, actualizaciones y bonos incluidos.</p><div class="price-box"><del>Antes: US$197</del><span>Hoy puedes acceder por</span><strong>US$9.90</strong><span>Pago único · Acceso inmediato</span></div><a class="button" data-checkout-button href="#checkout">Quiero mi acceso ahora</a><p class="checkout-note">Antes de publicar: en el script, reemplaza <code>PEGA-AQUI-TU-LINK-DE-CHECKOUT</code> por tu enlace real de pago. Configura también tu correo de soporte y las condiciones aplicables a tu país.</p></div></section>
+  <footer><div class="wrap"><strong>Academia NeoRobot</strong><br>© <span id="year"></span> · Aprender creando.</div></footer>
+
+  <script>
+    // CONFIGURACIÓN: pega aquí el checkout real antes de publicar.
+    const CHECKOUT_URL = "PEGA-AQUI-TU-LINK-DE-CHECKOUT";
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.querySelectorAll("[data-checkout-button]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        if (CHECKOUT_URL === "PEGA-AQUI-TU-LINK-DE-CHECKOUT") return;
+        event.preventDefault();
+        window.location.assign(CHECKOUT_URL);
+      });
+    });
+  </script>
+
+  <!-- PROMPTS HIGGSFIELD (usar formato 4:3, sin texto dentro de la imagen)
+  1. "A joyful 8-year-old child and an adult building a simple cardboard electric train on a bright home table, visible wires and AA battery holder, colorful craft materials, warm natural daylight, polished educational product photography, no words, no logos"
+  2. "A kid-friendly handmade motorized airplane made from cardboard, small DC motor and colorful craft supplies on a clean light-blue tabletop, studio product photography, playful STEM education style, no words, no logos"
+  3. "A friendly child showing a handmade robotic cardboard hand with strings and joints at a home craft table, colorful and believable materials, premium educational photography, no words, no logos"
+  4. "A small DIY water pump experiment using transparent tubing, a battery holder and recycled materials, bright family workshop, realistic product photography, no words, no logos"
+  5. "A playful cardboard robot walker with simple electronics on a colorful kids STEM workbench, strong purple, aqua and lime accents, clean product photography, no text, no logos"
+  -->
+</body>
+</html>
